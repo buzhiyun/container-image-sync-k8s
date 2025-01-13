@@ -30,6 +30,7 @@ for image in $k8s_image_list; do
     echo "Tagging image: $image"
     docker tag $image $new_image
     echo "Pushing image: $new_image"
+    docker push $new_image
 
 
     # fi
