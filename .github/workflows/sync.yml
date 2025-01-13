@@ -25,7 +25,7 @@ jobs:
 
       - name: Run with custom parameters
         run: |
-          RELEASE=${{ github.event.inputs.k8s_version }}
+          export RELEASE=${{ github.event.inputs.k8s_version }}
           bash ./start.sh
 
       # Login against a Docker registry except on PR
