@@ -23,13 +23,6 @@ jobs:
         uses: actions/checkout@v4
 
 
-      - name: Run with custom parameters
-        env:
-          RELEASE: ${{ github.event.inputs.k8s_version }}
-          MY_REGISTRY: ${{ secrets.REGISTRY }}
-        run: |
-          bash ./start.sh
-
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
       - name: Log into registry ${{ secrets.REGISTRY }}
@@ -42,3 +35,11 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
+
+          
+      - name: Run with custom parameters
+        env:
+          RELEASE: ${{ github.event.inputs.k8s_version }}
+          MY_REGISTRY: ${{ secrets.REGISTRY }}
+        run: |
+          bash ./start.sh
