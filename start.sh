@@ -4,12 +4,12 @@
 # RELEASE="$(curl -sSL https://dl.k8s.io/release/stable.txt)"
 ARCH="amd64"
 
-echo "https://dl.k8s.io/release/${RELEASE}/bin/linux/${ARCH}/kubeadm"
+# echo "https://dl.k8s.io/release/${RELEASE}/bin/linux/${ARCH}/kubeadm"
 
 curl -L --remote-name-all https://dl.k8s.io/release/${RELEASE}/bin/linux/${ARCH}/kubeadm
 chmod +x kubeadm
 
-ls -la
+# ls -la
 
 ./kubeadm config images list -o text --skip-headers --kubernetes-version "${RELEASE}"
 
@@ -26,7 +26,7 @@ for image in $k8s_image_list; do
     # 拉取镜像
     echo "Pulling image: $image"
     docker pull $image
-    new_image=$(echo $image | awk -F'/' '{for(i=2;i<=NF;i++) printf "%s/", $i; print ""}' | sed 's/\/$//')
+    new_image=${MY_REGISTRY}/$(echo $image | awk -F'/' '{for(i=2;i<=NF;i++) printf "%s/", $i; print ""}' | sed 's/\/$//')
     echo "Tagging image: $image"
     docker tag $image $new_image
     echo "Pushing image: $new_image"

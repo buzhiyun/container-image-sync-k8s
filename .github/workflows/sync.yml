@@ -24,8 +24,10 @@ jobs:
 
 
       - name: Run with custom parameters
+        env:
+          RELEASE: ${{ github.event.inputs.k8s_version }}
+          MY_REGISTRY: ${{ secrets.REGISTRY }}
         run: |
-          export RELEASE=${{ github.event.inputs.k8s_version }}
           bash ./start.sh
 
       # Login against a Docker registry except on PR
