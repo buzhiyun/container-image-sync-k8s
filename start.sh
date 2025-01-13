@@ -9,6 +9,8 @@ sudo chmod +x kubeadm
 
 ls -la
 
+./kubeadm config images list -o text --skip-headers --kubernetes-version ${RELEASE}
+
 k8s_image_list=$(./kubeadm config images list -o text --skip-headers --kubernetes-version ${RELEASE})
 # 定义重点镜像的关键词列表
 # keywords=("kube-apiserver" "kube-controller-manager" "kube-scheduler" "kube-proxy" "pause" "etcd")
